@@ -1,0 +1,67 @@
+{
+  "version": 8,
+
+  "name": "Animalia",
+
+  "center": [0, 20],
+
+  "zoom": 1.4,
+
+  "projection": {
+    "type": "globe"
+  },
+
+  "sources": {
+    "satellite": {
+      "type": "raster",
+      "tiles": [
+        "https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/g/{z}/{y}/{x}.jpg"
+      ],
+      "tileSize": 256,
+      "maxzoom": 19,
+      "attribution": "© OpenStreetMap contributors"
+    },
+
+    "animal-range": {
+      "type": "geojson",
+      "data": {
+        "type": "FeatureCollection",
+        "features": []
+      }
+    }
+  },
+
+  "layers": [
+    {
+      "id": "satellite",
+      "type": "raster",
+      "source": "satellite"
+    },
+
+    {
+      "id": "animal-range-fill",
+      "type": "fill",
+      "source": "animal-range",
+
+      "paint": {
+        "fill-color": ["coalesce", ["get", "fill_color"], "#FFAA00"],
+
+        "fill-opacity": ["coalesce", ["get", "fill_opacity"], 0.35]
+      }
+    },
+
+    {
+      "id": "animal-range-outline",
+      "type": "line",
+      "source": "animal-range",
+
+      "paint": {
+        "line-color": ["coalesce", ["get", "outline_color"], "#FFFFFF"],
+
+        "line-width": 2,
+
+        "line-opacity": 0.8
+      }
+    }
+  ]
+}

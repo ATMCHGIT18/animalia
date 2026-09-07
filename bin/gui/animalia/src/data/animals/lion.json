@@ -1,0 +1,70 @@
+{
+  "id": "lion",
+  "common_name": "Lion",
+  "scientific_name": "Panthera leo",
+  "imageurl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/020_The_lion_king_Snyggve_in_the_Serengeti_National_Park_Photo_by_Giles_Laurent.jpg/500px-020_The_lion_king_Snyggve_in_the_Serengeti_National_Park_Photo_by_Giles_Laurent.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+
+  "taxonomy": {
+    "kingdom": "Animalia",
+    "phylum": "Chordata",
+    "class": "Mammalia",
+    "order": "Carnivora",
+    "family": "Felidae",
+    "genus": "Panthera"
+  },
+
+  "conservation": {
+    "status": "Vulnerable",
+    "population_trend": "Decreasing"
+  },
+
+  "physical": {
+    "data": {
+      "weight_male": {
+        "min": 350,
+        "max": 700
+      },
+      "weight_female": {
+        "min": 150,
+        "max": 350
+      },
+      "height_male": {
+        "min": 200,
+        "max": 250
+      },
+      "height_female": {
+        "min": 150,
+        "max": 200
+      }
+    },
+    "measurements": {
+      "weight": "kg",
+      "height": "cm"
+    }
+  },
+
+  "habitat": ["Savanna", "Grassland", "Open woodland", "Dry forest"],
+
+  "diet": ["Zebra", "Wildebeest", "Buffalo", "Antelope"],
+
+  "distribution": {
+    "range_file": "/animals/ranges/lion.geojson"
+  },
+
+  "map": {
+    "fill_color": "#D97706",
+    "fill_opacity": 0.35,
+    "outline_color": "#F59E0B"
+  },
+
+  "sources": [
+    {
+      "name": "IUCN Red List",
+      "type": "conservation"
+    }
+  ],
+
+  "descriptions": {
+    "summary": "This is the summary of the lions"
+  }
+}

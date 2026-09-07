@@ -21,11 +21,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-
-# Project ignore
-*.env
-
-research/
-test.*
-test/

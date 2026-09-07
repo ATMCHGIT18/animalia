@@ -1,0 +1,141 @@
+.App {
+  display: grid;
+  grid-template-columns: 1fr 6fr 3fr;
+  grid-template-rows: 1fr 4fr 1fr;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.5)),
+    url("./images/background_image.jpg");
+}
+
+/* Icon */
+
+#icon {
+  grid-column: 1/2;
+  grid-row: 1/2;
+  justify-self: center;
+  align-self: center;
+  text-align: center;
+}
+
+#icon > div {
+  color: snow;
+}
+
+#icon > img {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  border: 0.4rem solid black;
+  background-color: black;
+}
+
+/* Map */
+
+#map {
+  grid-column: 2/3;
+  grid-row: 2/3;
+  justify-content: center;
+  border: 0.5rem solid black;
+  backdrop-filter: blur(3px);
+}
+
+/* SearchBar */
+
+#search {
+  width: 100%;
+  height: 100%;
+  grid-column: 2/3;
+  grid-row: 1/2;
+  justify-items: center;
+  align-content: center;
+}
+
+#search div {
+  width: 90%;
+  height: 90%;
+  align-content: center;
+}
+
+#searchbar {
+  width: 80%;
+  height: 30%;
+  display: flex;
+  justify-self: center;
+  justify-content: center;
+  filter: opacity(70%);
+  backdrop-filter: blur(2px);
+}
+
+#searchbar-input {
+  width: 90%;
+}
+
+#searchbar-submit {
+  width: 10%;
+}
+
+#searchbar-input:hover {
+  border: 0.2rem solid black;
+}
+
+/* AnimalInfo */
+#info {
+  grid-column: 3/4;
+  grid-row: 2/3;
+}
+
+#animalinfo-container {
+  margin: 0.5rem;
+  margin-top: 0;
+  padding: 0.3rem;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(120, 120, 120, 0.7));
+  justify-items: center;
+}
+
+#animalinfo-image {
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  width: 15rem;
+  height: 10rem;
+  border: 0.2rem solid gold;
+}
+
+#animalinfo-name {
+  justify-self: center;
+  color: azure;
+  padding: 0;
+  margin: 0;
+  margin-top: 0.3rem;
+}
+
+#animalinfo-sciname {
+  color: azure;
+
+  justify-self: center;
+  padding: 0;
+  margin: 0;
+}
+
+#animalinfo-conservation {
+  color: azure;
+}
+
+#animalinfo-habitat {
+  color: azure;
+  margin: 0;
+  margin-bottom: 0.3rem;
+}
+
+#animalinfo-habitats {
+  margin: 0;
+  margin-bottom: 0.3rem;
+  color: azure;
+  list-style: lower-roman;
+}
+
+#animalinfo-physical {
+  margin: 0;
+  margin-bottom: 0.3rem;
+  color: azure;
+}

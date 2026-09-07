@@ -1,0 +1,30 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "animal_id": "polar-bear",
+        "name": "Polar Bear",
+        "range_type": "current"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [-170.0, 70.0],
+              [-120.0, 70.0],
+              [-80.0, 72.0],
+              [-60.0, 75.0],
+              [-60.0, 82.0],
+              [-120.0, 82.0],
+              [-170.0, 78.0],
+              [-170.0, 70.0]
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

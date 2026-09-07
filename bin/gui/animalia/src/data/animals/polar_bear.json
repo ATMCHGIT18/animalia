@@ -1,0 +1,65 @@
+{
+  "id": "polar-bear",
+  "common_name": "Polar Bear",
+  "scientific_name": "Ursus maritimus",
+
+  "taxonomy": {
+    "kingdom": "Animalia",
+    "phylum": "Chordata",
+    "class": "Mammalia",
+    "order": "Carnivora",
+    "family": "Ursidae",
+    "genus": "Ursus"
+  },
+
+  "conservation": {
+    "status": "Vulnerable",
+    "population_trend": "Decreasing"
+  },
+
+  "physical": {
+    "data": {
+      "weight_male": {
+        "min": 350,
+        "max": 700
+      },
+      "weight_female": {
+        "min": 150,
+        "max": 350
+      },
+      "height_male": {
+        "min": 200,
+        "max": 250
+      },
+      "height_female": {
+        "min": 200,
+        "max": 250
+      }
+    },
+    "measurements": {
+      "weight": "kg",
+      "height": "cm"
+    }
+  },
+
+  "habitat": ["Sea ice", "Coastal areas", "Arctic marine environments"],
+
+  "diet": ["Ringed seals", "Bearded seals", "Marine mammals"],
+
+  "distribution": {
+    "range_file": "/animals/ranges/polar_bear.geojson"
+  },
+
+  "map": {
+    "fill_color": "#60A5FA",
+    "fill_opacity": 1,
+    "outline_color": "#BFDBFE"
+  },
+
+  "sources": [
+    {
+      "name": "IUCN Red List",
+      "type": "conservation"
+    }
+  ]
+}
