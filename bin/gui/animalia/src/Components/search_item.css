@@ -1,0 +1,20 @@
+.search-result-image {
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+#search-result-result-description {
+  margin: 0 0 5px 0;
+  font-size: 0.4rem;
+  color: #555;
+  font-weight: bold;
+}
+
+.search-result-result {
+  border: 0.3rem solid #eaeaea;
+  margin: 0.5rem;
+  padding: 1rem;
+  border-radius: 0.7rem;
+  display: flex;
+  gap: 1rem;
+}

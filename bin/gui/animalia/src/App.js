@@ -7,26 +7,22 @@ import Footer from "./Components/Footer";
 import icon from "./images/icon.png";
 
 function App() {
-  const [animalInfo, setAnimalInfo] = useState(null);
-  const [selectedAnimal, setSelectedAnimal] = useState(null);
+  const [selected, setSelected] = useState(null);
 
   return (
     <div className="App">
       <div id="icon">
-        <img src={icon}></img>
+        <img src={icon} alt={"Animalia"}></img>
         <div>Animalia</div>
       </div>
       <div id="search">
-        <SearchBar />
+        <SearchBar setSelected={setSelected} />
       </div>
       <div id="map">
-        <WorldMap
-          setAnimalInfo={setAnimalInfo}
-          setSelectedAnimal={setSelectedAnimal}
-        />
+        <WorldMap selectedData={selected} />
       </div>
       <div id="info">
-        <AnimalInfo animalInfo={animalInfo} />
+        <AnimalInfo animalInfo={selected} />
       </div>
       <div id="footer">
         <Footer />

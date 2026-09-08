@@ -1,0 +1,55 @@
+#animalinfo-container {
+  margin: 0.5rem;
+  margin-top: 0;
+  padding: 0.3rem;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(120, 120, 120, 0.7));
+  justify-items: center;
+}
+
+#animalinfo-image {
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  width: 15rem;
+  height: 10rem;
+  border: 0.2rem solid gold;
+}
+
+#animalinfo-name {
+  justify-self: center;
+  color: azure;
+  padding: 0;
+  margin: 0;
+  margin-top: 0.3rem;
+}
+
+#animalinfo-sciname {
+  color: azure;
+
+  justify-self: center;
+  padding: 0;
+  margin: 0;
+}
+
+#animalinfo-conservation {
+  color: azure;
+}
+
+#animalinfo-habitat {
+  color: azure;
+  margin: 0;
+  margin-bottom: 0.3rem;
+}
+
+#animalinfo-habitats {
+  margin: 0;
+  margin-bottom: 0.3rem;
+  color: azure;
+  list-style: lower-roman;
+}
+
+#animalinfo-physical {
+  margin: 0;
+  margin-bottom: 0.3rem;
+  color: azure;
+}

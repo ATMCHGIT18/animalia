@@ -14,10 +14,11 @@ def wiki_page(search_query,number_of_results):
     headers = {'User-Agent': 'Agent Tools for grabbing data'}
 
     url = base_url + endpoint
-
     response = requests.get(url,headers=headers,params={'q':search_query,'limit':number_of_results})
-
-    data = response.json()
+    try:
+        data = response.json()
+    except:
+        data = {'pages': []}
 
     return data['pages']
 
@@ -25,7 +26,13 @@ def wiki_page(search_query,number_of_results):
 
 # How to use this tool ------------------------------------------------------------------------------
 
-# pages = wiki_page('solar system',3)
+# pages = wiki_page('lion',3)
+
+# # print(type(pages))
+# for page in pages:
+#     print(page['title'])
+#     print(page['description'])
+#     print()
 
 # for page in pages:
 #   display(HTML('<a href="https://en.wikipedia.org/wiki/' + page['key'] + '">' + page['title'] + '</a>'))
@@ -36,12 +43,3 @@ def wiki_page(search_query,number_of_results):
 #   except:
 #     default_thumbnail = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Wikipedia-logo-v2.svg/200px-Wikipedia-logo-v2.svg.png'
 #     display(Image(data=default_thumbnail, width=150, height=136))
-
-
-
-
-# --------------------------------------- Problems ----------------------------------------
-# 1. This tools will retrieve all of the results for all topics I need to limit them into the animals only
-# 2. Images are okay but they are good enough for only the searchbar not the detailed ones.
-# 3. 
-# 

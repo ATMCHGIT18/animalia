@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-
+import "./animal_info.css";
 /* This component will be updated by adding the new info to the animal's JSON files */
 
 function AnimalInfo({ animalInfo }) {

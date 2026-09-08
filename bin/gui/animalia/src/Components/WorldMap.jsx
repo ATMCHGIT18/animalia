@@ -1,16 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as maplibregl from "maplibre-gl";
-import { loadAnimal } from "./Utils";
 
 import "maplibre-gl/dist/maplibre-gl.css";
 
-import lion from "../data/animals/lion.json";
-import polarBear from "../data/animals/polar_bear.json";
-import AnimalInfo from "./AnimalInfo";
-
 maplibregl.setWorkerUrl("/maplibre-gl-worker.mjs");
 
-function WorldMap({ setAnimalInfo, setSelectedAnimal }) {
+function WorldMap({ selectedData }) {
   const mapContainer = useRef(null);
   const mapRef = useRef(null);
 
@@ -64,10 +59,6 @@ function WorldMap({ setAnimalInfo, setSelectedAnimal }) {
     };
   }, []);
 
-  const clickHandle = () => {
-    loadAnimal(lion, mapRef, setSelectedAnimal, setAnimalInfo);
-  };
-
   return (
     <div
       style={{
@@ -83,7 +74,6 @@ function WorldMap({ setAnimalInfo, setSelectedAnimal }) {
           height: "100%",
         }}
       />
-      <button onClick={clickHandle}>Lions</button>
     </div>
   );
 }
