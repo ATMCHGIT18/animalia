@@ -28,10 +28,9 @@ def wiki_page(search_query,number_of_results):
 
 # pages = wiki_page('lion',3)
 
-# # print(type(pages))
+# print(type(pages))
 # for page in pages:
-#     print(page['title'])
-#     print(page['description'])
+#     print(page)
 #     print()
 
 # for page in pages:
