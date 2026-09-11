@@ -8,6 +8,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from bin.ai.animal_checker import WikiSearchResult , animal_cleaning_query_agent,WikipediaPage
+from bin.ai.selected_animal_info import AnimalInfoResult
 import uvicorn
 
 
@@ -46,5 +47,7 @@ def create_animal_info(payload:WikipediaPage):
 
         result = animal_data_crating(message=payload.title)
         return result
+    except Exception as e:
+        raise HTTPException(status_code=500,detail=str(e))
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
