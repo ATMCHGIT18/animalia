@@ -10,43 +10,20 @@ if project_root not in sys.path:
 
 from bin.ai.wiki_tools import wiki_page
 from langchain_openai import ChatOpenAI
-from langchain.agents import create_agent
 from langchain_core.tools import tool
 from langgraph.prebuilt import tools_condition
 from langgraph.graph import END
 from dotenv import load_dotenv
-from typing import List
 import json
-from pydantic import BaseModel,Field
+
+from bin.ai.animal_datastructure import WikiSearchResult , WikipediaThumbnailPage ,  WikipediaPage
+
 
 load_dotenv()
 
 TOOL_CALL_COUNTS = 0
 
-class WikipediaThumbnailPage(BaseModel):
-    mimetype:str = Field(description="Thumbnail media type")
-    size:int | None = Field(description="File size in bytes or null if not available",default=None)
-    width:int | None = Field(description=" Maximum recommended image width in pixels or null if not available",default=None)
-    height:int | None = Field(description="Maximum recommended image height in pixels or null if not available",default=None)
-    duration:int | None = Field(description="Length of the video, audio, or multimedia file or null for other media types",default=None)
-    url:str = Field(description="URL to download the file")
-
-class WikipediaPage(BaseModel):
-    id:int = Field(description="Page identifier which is integer number")
-    key:str =Field(description="Page title in URL-friendly format")
-    title:str = Field(description="The exact title of the wikipedia page")
-    excerpt:str | None = Field(default=None,description="A few lines giving a sample of page content with search terms highlighted with <span class=\"searchmatch\"> tags. Excerpts may end mid-sentence")
-    matched_title:str | None = Field(default=None,description="Title of the page redirected from, if the search term originally matched a redirect page or null if search term did not match a redirect page")
-    anchor:str | None = Field(description="Just put the anchor there if it is inside this key unless it is null",default=None)
-    description:str | None = Field(description="Short summary of the page topic based on the corresponding entry on Wikidata or null if no entry exists.",default=None)
-    thumbnail:WikipediaThumbnailPage | None = Field(description="Reduced-size version of the page's lead image or null if no lead imagine exists",default=None)
-
-class WikiSearchResult(BaseModel):
-    query:str = Field(description="The original search result")
-    results: List[WikipediaPage] = Field(description="A list of  matching Wikipedia pages")
-
-
-@tool("wikipedia-animal-check",response_format='content')
+# @tool("wikipedia-animal-check",response_format='content')
 def get_search(query:str) -> WikiSearchResult:
     '''Search Wikipedia and retrieve raw pages matching the query text only and only once. 
     Use this tool to gather potential candidate pages.
@@ -85,6 +62,7 @@ def get_search(query:str) -> WikiSearchResult:
 
         item = WikipediaPage(
             id= page.get("id"),
+            scientific_name=None,
             key=page.get('key'),
             title=page.get('title'),
             matched_title=page.get('matched_title',None),
@@ -111,7 +89,6 @@ def strict_one_call_router(state) -> str:
     return tools_condition(state)
 
 
-
 def animal_cleaning_query_agent(message: str) -> WikiSearchResult:
     '''Animal Search Cleaning Agent'''
     gpt = ChatOpenAI(model='gpt-4o-mini', temperature=0)
@@ -132,6 +109,7 @@ def animal_cleaning_query_agent(message: str) -> WikiSearchResult:
         f"EXECUTION INSTRUCTION:\n"
         f"For each item, silently ask yourself: 'Is this an actual biological animal?' If the answer is no, delete it.\n\n"
         f"Return only the remaining true animal items matching the WikiSearchResult schema perfectly. Set the final 'query' field to: '{message}'."
+        f"In the end complete the missing data inside the json for each point specially the scientific_name sections is really important to be found and put"
     )
     
     return structured_shaper.invoke(shaper_prompt)
