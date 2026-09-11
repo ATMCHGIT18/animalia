@@ -22,7 +22,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+__pycache__/
 
+page.html
 # Project ignore
 *.env
 
@@ -30,3 +32,6 @@ research/
 test.*
 test/
 note.txt
+
+*.geojson
+data_geo.json

@@ -14,12 +14,10 @@
   "sources": {
     "satellite": {
       "type": "raster",
-      "tiles": [
-        "https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/g/{z}/{y}/{x}.jpg"
-      ],
+      "tiles": ["https://tile.gbif.org/3857/satellite/{z}/{x}/{y}.jpg"],
       "tileSize": 256,
       "maxzoom": 19,
-      "attribution": "© OpenStreetMap contributors"
+      "attribution": "© GBIF"
     },
 
     "animal-range": {
@@ -47,6 +45,18 @@
         "fill-color": ["coalesce", ["get", "fill_color"], "#FFAA00"],
 
         "fill-opacity": ["coalesce", ["get", "fill_opacity"], 0.35]
+      }
+    },
+    {
+      "id": "animal-range-points",
+      "type": "circle",
+      "source": "animal-range",
+      "paint": {
+        "circle-radius": 4,
+        "circle-color": ["coalesce", ["get", "fill_color"], "#FFAA00"],
+        "circle-opacity": 0.7,
+        "circle-stroke-width": 1,
+        "circle-stroke-color": ["coalesce", ["get", "outline_color"], "#FFFFFF"]
       }
     },
 

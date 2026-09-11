@@ -1,9 +1,5 @@
-export async function loadAnimal(
-  animal,
-  mapRef,
-  setSelectedAnimal,
-  setAnimalInfo,
-) {
+export async function loadAnimal(animal, mapRef) {
+  // This function loads the data from the url of the animal.range inside the animal data or animal info json file
   if (!mapRef.current) {
     return;
   }
@@ -61,10 +57,6 @@ export async function loadAnimal(
     /*
      * Update React state.
      */
-
-    setSelectedAnimal(animal.id);
-
-    setAnimalInfo(animal);
   } catch (error) {
     console.error("Animal loading error:", error);
   }
