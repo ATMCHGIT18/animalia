@@ -2,7 +2,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 import os,sys
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__),'..', '..', '..'))
 
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
@@ -116,13 +116,13 @@ class AnimalDistributionProperties(BaseModel):
     gbifID: str = Field(description="the ID of the animal in the GBIF database ( the id that used to retrieve the data from GBIF)")
     scientificName: str = Field(description="Scientifc name of the animal")
     country: str = Field(description="Country of the observation")
-    stateProvince: str = Field(description="Province or state of the observaiton within the country of the observation")
+    stateProvince: str | None = Field(default=None,description="Province or state of the observaiton within the country of the observation")
     eventDate: str = Field(description="The date of the observation")
     recordedBy: str = Field(description="Recorded by who")
     basisOfRecord: str = Field(description="The basis of the record if it is recorded by human or not")
     coordinateUncertaintyInMeters: float = Field( description="The uncertainty of the coordinates of the observation")
-    image: str = Field(description="URL of the image that retrieved from GBIF database ( it is already in the data that is retrieved)")
-    reference: str = Field(description="Reference URL")
+    image: str | None = Field(description="URL of the image that retrieved from GBIF database ( it is already in the data that is retrieved)")
+    reference: str | None = Field(default=None,description="Reference URL")
     
 
 class AnimalDistributionFeature(BaseModel):
@@ -133,6 +133,11 @@ class AnimalDistributionFeature(BaseModel):
 class AnimalDistributionFeatureCollection(BaseModel):
     type_: str = Field(alias="type",default="FeatureCollection")
     data: List[AnimalDistributionFeature] = Field(description="some animals have a wide range which cannot be described by one geometry so this is the list of those")
+
+class AnimalSource(BaseModel):
+    id: str | None = Field(default=None,description="The id of the source it could be the lower case of the name without any space")
+    soucreURL: str | None = Field(default=None,description="The url of the source.")
+    sourceLicence: str | None = Field(default=None,description="The licence for the content of the source that is used for the later process")
 
 class AnimalInfoResult(BaseModel):
     id: str = Field(description="id of the animal which is the lowercase of the name without any space between")
@@ -150,6 +155,7 @@ class AnimalInfoResult(BaseModel):
     diet: List[str] = Field(description="List of the diets of the animal")
     distribution: AnimalDistributionFeatureCollection = Field(description="distribution data of the animal in the globe and where we can find it")
     description: str | None = Field(default=None,description="The description of the animal")
+    source: List[AnimalSource] = Field(description="The sources that used for creating this data")
 
 class WikipediaThumbnailPage(BaseModel):
     mimetype:str = Field(description="Thumbnail media type")

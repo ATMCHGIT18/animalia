@@ -1,5 +1,13 @@
+import warnings
+warnings.filterwarnings('ignore')
+
+import os,sys
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__),'..', '..', '..'))
+
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 import requests
-import json
+
 
 def gbif_taxonomy_data_grabber(name:str):
     '''Retrieving the taxonomy data of the animal from GBIF api'''
@@ -78,19 +86,6 @@ def gbif_geo_data_grabber(usageKey:int):
     geodata = occurrences_to_geojson(data['results'])
     return geodata
 
-
-def get_adw_page(scientific_name:str):
-    '''Retrieve the whole page of the ADW of the animal'''
-    name = "_".join(scientific_name.split(sep=" "))
-    base_url = f"https://animaldiversity.org/accounts/{name}/"
-
-    response = requests.get(url=base_url)
-
-    if(not response.ok):
-        raise KeyError("Something went wrong")
-
-    page = response.text
-    return page
 
 
 # if __name__ == "__main__":

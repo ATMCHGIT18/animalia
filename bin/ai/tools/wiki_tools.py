@@ -2,6 +2,14 @@ import requests
 import json
 from IPython.display import Image , HTML
 from IPython.display import display
+import warnings
+warnings.filterwarnings('ignore')
+
+import os,sys
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__),'..', '..', '..'))
+
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 
 def wiki_page(search_query,number_of_results):
     '''This is a tool to search and retrive data from a search_query and the 
@@ -22,6 +30,25 @@ def wiki_page(search_query,number_of_results):
 
     return data['pages']
 
+
+def get_wikipedia_page(key:str):
+    '''This tool will retrive the full page of the selected topic for you'''
+
+    headers = {'User-Agent': 'Agent Tools for grabbing data'}
+
+    page_url = 'https://en.wikipedia.org/wiki/' + key
+
+    response = requests.get(page_url,headers=headers)
+    if (not response.ok):
+        raise KeyError("Something wrong with the response of the page that you requested")
+    
+    try:
+        content = response.text
+    except Exception as e:
+        print(f"Error occured in reading HTML of the page : \n{e}")
+        content = ""
+
+    return content
 
 
 # How to use this tool ------------------------------------------------------------------------------

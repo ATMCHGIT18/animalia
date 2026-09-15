@@ -4,19 +4,15 @@ warnings.filterwarnings('ignore')
 import random
 
 import os,sys
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__),'..', '..', '..'))
 
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
-from bin.ai.animal_datastructure import *
-from bin.ai.animal_checker import get_search
-from bin.ai.GBIF_tools import gbif_taxonomy_data_grabber , gbif_geo_data_grabber
-import json 
-from pydantic import BaseModel
-from langchain_openai import ChatOpenAI
-from langchain.agents import create_agent
-from langgraph.graph import StateGraph,END,START
+from bin.ai.tools.animal_datastructure import *
+from bin.ai.tools.GBIF_tools import gbif_taxonomy_data_grabber , gbif_geo_data_grabber
+from bin.ai.tools.adw_page_reader import get_adw_page
+from bin.ai.tools.wiki_tools import get_wikipedia_page
 from langchain.tools import tool
 from dotenv import load_dotenv
 
@@ -34,7 +30,7 @@ def animal_data_grabber(animal_page:WikipediaPage) -> AnimalInfoResult:
     '''Searching articles in the wikipedia and the other sources that gives you the information
     on the animal that is searched'''
 
-    animal_taxo_data , key = gbif_taxonomy_data_grabber(animal_page['scientific_name'])
+    animal_taxo_data , key = gbif_taxonomy_data_grabber(animal_page.scientific_name)
 
     geodata = gbif_geo_data_grabber(int(key))
 
@@ -104,8 +100,8 @@ def animal_data_grabber(animal_page:WikipediaPage) -> AnimalInfoResult:
     result = AnimalInfoResult(
         id=animal_taxo_data['scientificName'],
         scientific_name=animal_taxo_data['canonicalName'],
-        common_name=animal_page['title'],
-        imageurl=animal_page['thumbnail']['url'],
+        common_name=animal_page.title,
+        imageurl=animal_page.thumbnail.url,
         taxonomy=taxonomy,
         status=None,
         clades=None,
@@ -115,9 +111,22 @@ def animal_data_grabber(animal_page:WikipediaPage) -> AnimalInfoResult:
         habitat=[""],
         diet=[""],
         distribution=distribution,
-        description=None
+        description=None,
+        source=[AnimalSource()]
     )
 
     return result
 
-      
+
+@tool("adw_page_reader",response_format='content')
+def adw_page_reader(scientific_name:str) -> str:
+    '''This tool will retrieve the full page of the selected animal from ADW.'''
+    page = get_adw_page(scientific_name=scientific_name)
+    return page
+
+@tool("wikipedia_page_reader",response_format='content')
+def wikipedia_page_reader(name:str) -> str:
+    '''This tool will retrieve the full page of the selected animal from Wikipedia'''
+    page = get_wikipedia_page(name)
+    return page
+
