@@ -413,4 +413,5 @@ The long-term vision is to create an intelligent, interactive digital representa
 
 ## Author
 
+@ATMCHGIT18
 Developed with curiosity and a passion for technology, artificial intelligence, and the natural world.
